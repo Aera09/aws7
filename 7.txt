@@ -1,16 +1,33 @@
-#YOLO
-    import cv2
-    from ultralytics import YOLO
+# Custom Exception for negative numbers
+class NegativeNumberError(Exception):
+    pass
 
-    model = YOLO("yolov8n.pt")
-    cap = cv2.VideoCapture(0)
 
-    while True:
-        ret, frame = cap.read()
-        results = model(frame)
-        cv2.imshow("YOLO", results[0].plot())
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
+try:
+    # a) Take two numbers
+    a = int(input("Enter first number: "))
+    b = int(input("Enter second number: "))
 
-    cap.release()
-    cv2.destroyAllWindows()
+    # c) Raise custom exception if number is negative
+    if a < 0 or b < 0:
+        raise NegativeNumberError("Negative numbers are not allowed!")
+
+    # Division operation
+    result = a / b
+
+except ZeroDivisionError:
+    print("Error: Cannot divide by zero.")
+
+except ValueError:
+    print("Error: Please enter valid integers only.")
+
+except NegativeNumberError as ne:
+    print("Custom Error:", ne)
+
+else:
+    # Executes only when no exception occurs
+    print("Division Result:", result)
+
+finally:
+    # Always executes
+    print("Program execution completed.")
