@@ -31,3 +31,70 @@ else:
 finally:
     # Always executes
     print("Program execution completed.")
+
+--------------------------------------------
+try:
+    a = int(input("Enter number: "))
+    print(10 / a)
+except:
+    print("Error occurred!")
+---------------------------------------------
+# Handling Multiple Exceptions
+try:
+    x = int("abc")
+    y = 10 / 0
+except ValueError:
+    print("Invalid conversion to int")
+except ZeroDivisionError:
+    print("Cannot divide by zero")
+
+except Exception as e:
+    print("Error:", e)
+
+----------------------------------------------
+# Using else and finally
+try:
+    x = int(input("Enter number: "))
+except ValueError:
+    print("Invalid input")
+else:
+    print("Valid number:", x)
+
+try:
+    f = open("file.txt")
+except FileNotFoundError:
+    print("File not found")
+finally:
+    print("Execution completed")
+
+----------------------------------------------
+
+# Raising Your Own Exception (raise)
+x = -5
+if x < 0:
+    raise ValueError("Number cannot be negative")
+
+class AgeError(Exception):
+    pass
+
+age = 15
+if age < 18:
+    raise AgeError("Age must be 18+")
+
+-----------------------------------------------
+class AgeError(Exception):
+    pass
+
+try:
+    age = int(input("Enter age: "))
+
+    if age < 18:
+        raise AgeError("You must be at least 18")
+
+    print("Valid age")
+except ValueError:
+    print("Enter numbers only")
+except AgeError as e:
+    print(e)
+finally:
+    print("Program finished")
